@@ -19,7 +19,7 @@ fun main() {
     for (c in vals) {
         val prod = ab.get(2020 - c)
 
-        if (prod != null && 2020 - c + c == 2020) {
+        if (prod != null) {
             println("P2: " + prod * c)
             break
         }

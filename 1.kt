@@ -12,9 +12,7 @@ fun main() {
         for ((ib, b) in input.withIndex())
             if (ia != ib) {
                 ab.put(a + b, a * b)
-
-                if (a + b == 2020)
-                    p1 = a * b;
+                if (a + b == 2020) p1 = a * b;
             }
 
     for (c in input) {

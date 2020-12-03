@@ -8,27 +8,18 @@ fun main() {
     File("input/2").forEachLine { input.add(it.split(" ")) }
 
     for (v in input) {
-        val split = v[0].split("-")
-        val al = split[0].toInt()
-        val am = split[1].toInt()
-        val ch = v[1][0]
-        var found = false
+        val ll = v[0].split("-")[0].toInt()
+        val ul = v[0].split("-")[1].toInt()
         var total = 0
+        var found = 0
 
-        for ((ip, p) in v[2].withIndex()) {
-            if (p == ch)
-                total += 1
-
-            if ((ip == al - 1 || ip == am - 1) && p == ch)
-                if(!found) {
-                    p2 += 1
-                    found = true
-                } else
-                    p2 -= 1
+        for ((i, c) in v[2].withIndex()) {
+            if (c == v[1][0]) ++total
+            if ((i == ll - 1 || i == ul - 1) && c == v[1][0]) ++found
         }
 
-        if (total >= al && total <= am)
-            p1 += 1
+        if (total >= ll && total <= ul) ++p1
+        if (found == 1) ++p2
     }
 
     println("P1: " + p1 + "\nP2: " + p2)

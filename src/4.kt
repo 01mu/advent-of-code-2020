@@ -49,7 +49,7 @@ fun HCL(id: HashMap<String, String>, a: Array<Char>, z: Array<Char>): Boolean {
     val hcl = id.get("hcl").toString()
 
     if (hcl[0] == '#') {
-        if(hcl.substring(1).length != 6) return true
+        if (hcl.substring(1).length != 6) return true
         for (v in hcl.substring(1)) if (v !in a && v !in z) return true
     } else return true
 

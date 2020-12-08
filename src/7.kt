@@ -10,8 +10,8 @@ fun main() {
 
         val splitName = s.split(" contain ")
         val key = splitName[0].trim()
-
         val childCountPairs = mutableListOf<Pair<String, Int>>()
+
         bags.put(key, childCountPairs)
 
         for (pair in splitName[1].trim().split(" , ")) {
@@ -37,7 +37,7 @@ fun leastOne(children: List<Pair<String, Int>>,
 
     for (bag in children) {
         if (bag.first == "shiny gold") return true
-        else if (bag.first == "no other") return false
+        else if (bag.first == "no other") continue
         else if (leastOne(bags.getValue(bag.first), bags)) return true
     }
 

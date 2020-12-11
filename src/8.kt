@@ -22,13 +22,13 @@ fun modIns(pos: Int, ins: List<Pair<String, Int>>):
     return Pair(v, altered)
 }
 
-fun p1(ins: List<Pair<String, Int>>): Pair<Boolean, Int> {
+fun accumulator(ins: List<Pair<String, Int>>): Pair<Boolean, Int> {
     val positions = HashMap<Int, Int>()
     var acc = 0
     var pos = 0
     var found = false
 
-    while (true) {
+    while (pos < ins.size && !positions.containsKey(pos)) {
         if (!positions.containsKey(pos)) positions.put(pos, 1)
 
         if (ins[pos].first == "jmp") pos += ins[pos].second
@@ -36,7 +36,6 @@ fun p1(ins: List<Pair<String, Int>>): Pair<Boolean, Int> {
         else ++pos
 
         if (pos == ins.size - 1) found = true
-        if (pos >= ins.size || positions.containsKey(pos)) break
     }
 
     return Pair(found, acc)
@@ -44,16 +43,20 @@ fun p1(ins: List<Pair<String, Int>>): Pair<Boolean, Int> {
 
 fun p2(ins: List<Pair<String, Int>>): Int {
     var i = 0
+    var found = false
+    var acc = 0
 
-    while (i != ins.size - 1) {
+    while (i != ins.size - 1 && !found) {
         val z = modIns(i, ins)
-        val loop = p1(z.second)
+        val loop = accumulator(z.second)
 
-        if (loop.first) return loop.second
-        else i = z.first
+        if (loop.first) found = true
+
+        acc = loop.second
+        i = z.first
     }
 
-    return -1
+    return acc
 }
 
 fun main() {
@@ -69,5 +72,5 @@ fun main() {
         ins.add(Pair(code, num))
     }
 
-    println("P1: " + p1(ins).second + "\nP2: " + p2(ins))
+    println("P1: " + accumulator(ins).second + "\nP2: " + p2(ins))
 }
